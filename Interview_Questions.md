@@ -26,7 +26,7 @@ A: This can be done in multiple ways,
                  This can be configured in the "Build Triggers" section of a job.
                  
      - Build Triggers: Jenkins can be configured to use the Git plugin, which allows you to specify a Git repository and branch to build. 
-                 The plugin can be configured to automatically build when changes are pushed to the repository.
+                 The plugin can be configured to automatically build when changes are pushed to the repository. It is a costly process though useses too much resources.
                  
      - Webhooks: A webhook can be created in GitHub to notify Jenkins when changes are pushed to the repository. 
                  Jenkins can then automatically build the updated code. This can be set up in the "Build Triggers" section of a job and in the GitHub repository settings.
