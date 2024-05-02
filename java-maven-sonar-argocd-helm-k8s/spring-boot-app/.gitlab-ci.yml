@@ -1,0 +1,46 @@
+image: 'abhishekf5/maven-abhishek-docker-agent:v1'
+
+#provide your own variables like ec2 ip and sonar user login
+variables:
+SONAR_HOST_URL: http://34.203.223.11:9000
+SONAR_LOGIN: ${SONAR_LOGIN}
+
+#define the default working directory for the pipeline
+before_script:
+- cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
+
+stages:
+-build
+-test
+-sonarqube
+-dockerization
+
+build-job:
+stage: build
+script:
+- echo "compiling the code.."
+- mvn clean package
+
+unit-test-job
+stage: test
+script:
+- echo "running unit test...THis will take about 1 min"
+- mvn test
+
+code-quality-job:
+stage: sonarqube
+script:
+- echo "scanning code"
+- mvn sonar:sonar -Dsonar.host.url=${SONAT_HOST_URL} -Dsonar.login=${SONAR_LOGIN}
+
+docker:
+stage: dockerization
+image: docker:stable
+services:
+- docker:dinf
+script:
+- docker build -t gitlab-cicd-demo:latest
+- docker login -v $DOCKER_USERNAME -p $DOCKER_PASSWORD
+- docker tag gitlab-cicd-demo:lastest $DOCKER_USERNAME/gitlab-cicd-demo:latest
+- docker push $DOCKER_USERNAME/gitlab-cicd-demi:latest
+
