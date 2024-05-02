@@ -33,14 +33,14 @@ script:
 - echo "scanning code"
 - mvn sonar:sonar -Dsonar.host.url=${SONAT_HOST_URL} -Dsonar.login=${SONAR_LOGIN}
 
-docker:
-stage: dockerization
-image: docker:stable
-services:
-- docker:dinf
-script:
-- docker build -t gitlab-cicd-demo:latest
-- docker login -v $DOCKER_USERNAME -p $DOCKER_PASSWORD
-- docker tag gitlab-cicd-demo:lastest $DOCKER_USERNAME/gitlab-cicd-demo:latest
-- docker push $DOCKER_USERNAME/gitlab-cicd-demi:latest
+#docker:
+#stage: dockerization
+#image: docker:stable
+#services:
+#- docker:dinf
+#script:
+#- docker build -t gitlab-cicd-demo:latest
+#- docker login -v $DOCKER_USERNAME -p $DOCKER_PASSWORD
+#- docker tag gitlab-cicd-demo:lastest $DOCKER_USERNAME/gitlab-cicd-demo:latest
+#- docker push $DOCKER_USERNAME/gitlab-cicd-demi:latest
 
